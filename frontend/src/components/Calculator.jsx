@@ -28,10 +28,18 @@ const Calculator = () => {
                 num1,
                 num2
             });
-            setResult(response.data.result);
-            setDisplay(String(response.data.result));
+
+            if (response.data && response.data.result !== undefined) {
+                setResult(response.data.result);
+                setDisplay(String(response.data.result));
+            } else {
+                setError('Invalid response from server');
+            }
         } catch (err) {
-            setError(err.response?.data?.error || 'An error occurred');
+            console.error('Calculation error:', err);
+            const errorMessage = err.response?.data?.error || err.message || 'An error occurred';
+            setError(errorMessage);
+            setResult('');
         } finally {
             setLoading(false);
         }
@@ -45,6 +53,11 @@ const Calculator = () => {
     };
 
     const handleEqual = () => {
+        if (!display || display.trim() === '') {
+            setError('Please enter a calculation');
+            return;
+        }
+
         const operators = ['+', '-', '*', '/', '^'];
         let operator = null;
         let nums = [];
@@ -61,6 +74,11 @@ const Calculator = () => {
             const num1 = parseFloat(nums[0]);
             const num2 = parseFloat(nums[1]);
 
+            if (isNaN(num1) || isNaN(num2)) {
+                setError('Invalid numbers');
+                return;
+            }
+
             let operationName = '';
             switch (operator) {
                 case '+': operationName = 'add'; break;
@@ -68,9 +86,13 @@ const Calculator = () => {
                 case '*': operationName = 'multiply'; break;
                 case '/': operationName = 'divide'; break;
                 case '^': operationName = 'power'; break;
-                default: return;
+                default:
+                    setError('Invalid operation');
+                    return;
             }
             handleCalculate(operationName, num1, num2);
+        } else {
+            setError('Invalid expression');
         }
     };
 
