@@ -1,0 +1,145 @@
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+}
+
+.calculator {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
+
+.display {
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: right;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.display .input {
+    font-size: 1.2rem;
+    color: #aaa;
+    min-height: 24px;
+}
+
+.display .result {
+    font-size: 2rem;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.display .error {
+    color: #ff6b6b;
+    font-size: 1rem;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: 500;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn.num {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+}
+
+.btn.op {
+    background-color: #e7f5ff;
+    color: #1971c2;
+    font-weight: 600;
+}
+
+.btn.func {
+    background-color: #f3f0ff;
+    color: #6741d9;
+    font-weight: 600;
+}
+
+.btn.clear {
+    background-color: #fff5f5;
+    color: #e03131;
+    font-weight: 600;
+}
+
+.btn.equal {
+    background-color: #1971c2;
+    color: white;
+    grid-column: span 2;
+    /* Make equals button wider if desired, or keep standard */
+}
+
+.btn.equal:hover {
+    background-color: #1864ab;
+}
+
+/* Dark mode support if parent has dark class, or media query */
+@media (prefers-color-scheme: dark) {
+    .calculator-container {
+        background-color: #1a1a1a;
+    }
+
+    .calculator {
+        background-color: #2d2d2d;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn {
+        background-color: #3d3d3d;
+        color: #e0e0e0;
+    }
+
+    .btn.num {
+        background-color: #404040;
+        border-color: #505050;
+    }
+
+    .btn.op {
+        background-color: #183b56;
+        color: #74c0fc;
+    }
+
+    .btn.func {
+        background-color: #2b2644;
+        color: #b197fc;
+    }
+
+    .btn.clear {
+        background-color: #442828;
+        color: #ff8787;
+    }
+}
